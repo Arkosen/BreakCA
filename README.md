@@ -37,12 +37,12 @@ samtools view -L contig_assembly.bed input.bam | cut -f1 > read.Ids.txt
 # 11. If pe (pe=1) get fastq for pair-end format or get single end (pe=0) format
 
 if (( $pe > 0 ))
-then seqtk subseq forward_reads.fa read.Ids.txt  > r1.fastq
-else seqtk subseq forward_reads.fa read.Ids.txt > unpaired.fastq
-fi
+then seqtk subseq forward_reads.fa read.Ids.txt  > r1.fastq 
+else seqtk subseq forward_reads.fa read.Ids.txt > unpaired.fastq 
+fi 
 
-if (( $pe > 0 ))
-then seqtk subseq reverse_reads.fa read.Ids.txt  > r2.fastq
+if (( $pe > 0 )) 
+then seqtk subseq reverse_reads.fa read.Ids.txt  > r2.fastq 
 fi
 
 # 12. Run SPAdes contig assembly or your favorite contig assembler
@@ -53,14 +53,15 @@ fi
 
 # 13. Align SPAdes
 perl ~/BreakCA/bin/fasta_to_fastq.pl spades/contigs.fasta > contigs.fq
+
 bwa mem -t 12 genome.fa contigs.fq | samtools view -S -b -h -F 4 - > contigs.bam
+
 samtools sort contigs.bam contigs.sorted
+
 samtools index contigs.sorted.bam
 
 # 14. Find contig supported base positions
-results=posteriors.tsv
-contigs=contigs.sorted.bam
-Rscript --vanilla ~/BreakCA/bin/contig_support_wrapper.R $contigs $results contig.supp.txt
+Rscript --vanilla ~/BreakCA/bin/contig_support_wrapper.R contigs.sorted.bam posteriors.tsv contig.supp.txt
 
 # 15. Predefine regions to test, 20bps non-overlapping windows
 Rscript --vanilla ~/BreakCA/bin/predefine_windows.R peaks.bed windows.bed
