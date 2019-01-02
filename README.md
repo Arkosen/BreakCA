@@ -28,10 +28,10 @@ Rscript --vanilla ~/BreakCA/bin/count_reads_per_base.R reads.tsv insertion.pileu
 # 7. Add clipping information including information content and clip length
 Rscript --vanilla ~/BreakCA/bin/get_clipping_information.R sc.tsv sc_w_seq.tsv clip.info.txt
 
-# 8. Calculate posterior mean and standard deviation for clipped positions and output contig assembly regions as bed files.
+# 8. Calculate posterior mean and standard deviation.
 Rscript --vanilla ~/BreakCA/bin/calculate_posterior.R counts.tsv posteriors.tsv contig_assembly.bed clip.info.txt all.positions.tsv
 
-# 10. get read ID
+# 10. Get read ID
 samtools view -L contig_assembly.bed input.bam | cut -f1 > read.Ids.txt
 
 # 11. If pe (pe=1) get fastq for pair-end format or get single end (pe=0) format
