@@ -68,7 +68,7 @@ Rscript --vanilla ~/BreakCA/bin/predefine_windows.R peaks.bed windows.bed
 # 16. Prepare contigs for machine-learning
 Rscript --vanilla ~/BreakCA/bin/prepare_dataset.R all.positions.tsv windows.bed contig.supp.txt classifier_id_frame.csv classifier_input.tsv
 
-# 17. Make prediction using logistic regression, models can be created using build_randomForest.R script under ~/BreakCA/misc, we also have pe and se models created using GM12878 ATAC-seq and ChIP-seq reads avaiable on request.
+# 17. Make prediction using logistic regression, models can be created using build_randomForest.R script under ~/BreakCA/misc, we also have pe and se models created using GM12878 ATAC-seq and ChIP-seq reads available on request.
 Rscript --vanilla ~/BreakCA/bin/make_predictions.R classifier_input.tsv $model prediction.txt
 
 # The feature map building scripts can be run using breakCA.bash shell script in linux
