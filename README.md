@@ -45,7 +45,7 @@ if (( $pe > 0 ))
 then seqtk subseq reverse_reads.fa read.Ids.txt  > r2.fastq
 fi
 
-# 12. Run SPAdes contig assembly
+# 12. Run SPAdes contig assembly or your favorite contig assembler
 if (( $pe > 0 ))
 then spades.py -t 12 -k 21,33 --only-assembler -o spades -1 r1.fastq -2 r2.fastq
 else spades.py -t 12 -k 21,33 --only-assembler -o spades -s unpaired.fastq
