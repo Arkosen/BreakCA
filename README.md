@@ -2,7 +2,7 @@
 Detecting small and medium Indels using ATAC and ChIP-seq reads.
 
 # Introduction: 
-Sequencing reads that span variant breakpoints are “chimeric” in local alignment because they either appear to result from the fusion of two sequences or contain insertions/deletions within the read sequence and are discordant from the reference genome. We utilize these chimeric reads in a machine-learning framework to detect indels within ATAC and ChIP-seq peaks
+Sequencing reads that span variant breakpoints are “chimeric” in local alignment because they either appear to result from the fusion of two sequences or contain insertions/deletions within the read sequence and are discordant from the reference genome. We utilize these reads in a machine-learning framework to detect indels within ATAC and ChIP-seq peaks
 
 # Methods: 
 Step wise implementation of BreakCA is as follows. All samples are aligned using BWA-MEM using default params. 
@@ -29,53 +29,21 @@ Rscript --vanilla ~/BreakCA/bin/count_reads_per_base.R reads.tsv insertion.pileu
 Rscript --vanilla ~/BreakCA/bin/get_clipping_information.R sc.tsv sc_w_seq.tsv clip.info.txt
 
 # 8. Calculate posterior mean and standard deviation.
-Rscript --vanilla ~/BreakCA/bin/calculate_posterior.R counts.tsv posteriors.tsv contig_assembly.bed clip.info.txt all.positions.tsv
+Rscript --vanilla ~/BreakCA/bin/calculate_posterior.R counts.tsv posteriors.tsv clip.info.txt all.positions.tsv
 
-# 10. Get read ID
-samtools view -L contig_assembly.bed input.bam | cut -f1 > read.Ids.txt
-
-# 11. If pe (pe=1) get fastq for pair-end format or get single end (pe=0) format
-
-if (( $pe > 0 ))
-then seqtk subseq forward_reads.fa read.Ids.txt  > r1.fastq 
-else seqtk subseq forward_reads.fa read.Ids.txt > unpaired.fastq 
-fi 
-
-if (( $pe > 0 )) 
-then seqtk subseq reverse_reads.fa read.Ids.txt  > r2.fastq 
-fi
-
-# 12. Run SPAdes contig assembly or your favorite contig assembler
-if (( $pe > 0 ))
-then spades.py -t 12 -k 21,33 --only-assembler -o spades -1 r1.fastq -2 r2.fastq
-else spades.py -t 12 -k 21,33 --only-assembler -o spades -s unpaired.fastq
-fi
-
-# 13. Align SPAdes
-perl ~/BreakCA/bin/fasta_to_fastq.pl spades/contigs.fasta > contigs.fq
-
-bwa mem -t 12 genome.fa contigs.fq | samtools view -S -b -h -F 4 - > contigs.bam
-
-samtools sort contigs.bam contigs.sorted
-
-samtools index contigs.sorted.bam
-
-# 14. Find contig supported base positions
-Rscript --vanilla ~/BreakCA/bin/contig_support_wrapper.R contigs.sorted.bam posteriors.tsv contig.supp.txt
-
-# 15. Predefine regions to test, 20bps non-overlapping windows
+# 9. Predefine regions to test, 20bps non-overlapping windows
 Rscript --vanilla ~/BreakCA/bin/predefine_windows.R peaks.bed windows.bed
 
-# 16. Prepare contigs for machine-learning
-Rscript --vanilla ~/BreakCA/bin/prepare_dataset.R all.positions.tsv windows.bed contig.supp.txt classifier_id_frame.csv classifier_input.tsv
+# 10. Prepare contigs for machine-learning
+Rscript --vanilla ~/BreakCA/bin/prepare_dataset.R all.positions.tsv windows.bed classifier_id_frame.csv classifier_input.tsv
 
-# 17. Make prediction using logistic regression, 
+# 11. Make prediction using logistic regression, 
 Models can be created using build_randomForest.R script under ~/BreakCA/misc. We also have pe and se models created using GM12878 ATAC-seq and ChIP-seq reads available on request.
 
 Rscript --vanilla ~/BreakCA/bin/make_predictions.R classifier_input.tsv model.rda prediction.txt
 
 # The feature map building scripts can be run using breakCA.bash shell script in linux
-Usage= ./breakCA.bash -a <path to R> -b <.bam> -p <.bed>  -f <read1.fq.gz> -r <read2.fq.gz> -o <output directory> -s <1=paired end, 0=single end > -g <fasta file for genome, directory should contain bwa index> -t <# of threads>
+Usage= ./breakCA.bash -a <path to R> -b <.bam> -p <.bed> -o <output directory> -g <fasta file for genome> 
 
 # Prediction on feature map can be can be run using predict.bash shell script in linux
 Usage= ./predict.bash -a <path to R> -o <output directory> -w < peaks > -m < model >
