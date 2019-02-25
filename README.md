@@ -5,7 +5,7 @@ Detecting small and medium Indels using ATAC and ChIP-seq reads.
 Sequencing reads that span variant breakpoints are “chimeric” in local alignment because they either appear to result from the fusion of two sequences or contain insertions/deletions within the read sequence and are discordant from the reference genome. We utilize these reads in a machine-learning framework to detect indels within ATAC and ChIP-seq peaks
 
 # Methods: 
-Step wise implementation of BreakCA is as follows. All samples are aligned using BWA-MEM using default params. 
+Step wise implementation of BreakCA is as follows. All samples are aligned using BWA-MEM using default params. All read with MAPQ>30 is kept for analysis.
 
 # 1. Get reads overlapping peaks.
 Rscript --vanilla  ~/BreakCA/bin/get_reads_from_bam.R input.bam peaks.bed reads.tsv
@@ -43,12 +43,13 @@ Rscript --vanilla ~/BreakCA/bin/add_QD.R classifier_input.tsv gatk.indels.vcf wi
 # 11. Make prediction
 Models can be created using build_randomForest.R script under ~/BreakCA/misc. We also have pe and se models created using GM12878 ATAC-seq and ChIP-seq reads available on request.
 
-Rscript --vanilla ~/BreakCA/bin/make_predictions.R classifier_input.tsv model.rda prediction.txt
+Rscript --vanilla ~/BreakCA/bin/make_predictions.R classifier_input.tsv model.rda prediction.txt 
 
 # The feature map building scripts can be run using breakCA.bash shell script in linux
 Usage= ./breakCA.bash -a path to R -b .bam -p .bed -o output directory -g fasta file for genome
 
 # Prediction on feature map can be can be run using predict.bash shell script in linux
-Usage= ./predict.bash -a path to R -o output directory -w peaks -m model
+Usage= ./predict.bash -a path to R -o output directory -w peaks -m model -g 0
+when g=0 QD from GATK is not added, when g=1 QD is added provided the output directory contain file named gark.indels.vcf
 
 
