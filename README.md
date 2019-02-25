@@ -46,9 +46,9 @@ Models can be created using build_randomForest.R script under ~/BreakCA/misc. We
 Rscript --vanilla ~/BreakCA/bin/make_predictions.R classifier_input.tsv model.rda prediction.txt
 
 # The feature map building scripts can be run using breakCA.bash shell script in linux
-Usage= ./breakCA.bash -a <path to R> -b <.bam> -p <.bed> -o <output directory> -g <fasta file for genome> 
+Usage= ./breakCA.bash -a path to R -b .bam -p .bed -o output directory -g fasta file for genome
 
 # Prediction on feature map can be can be run using predict.bash shell script in linux
-Usage= ./predict.bash -a <path to R> -o <output directory> -w < peaks > -m < model >
+Usage= ./predict.bash -a path to R -o output directory -w peaks -m model
 
 
