@@ -37,7 +37,10 @@ Rscript --vanilla ~/BreakCA/bin/predefine_windows.R peaks.bed windows.bed
 # 10. Prepare contigs for machine-learning
 Rscript --vanilla ~/BreakCA/bin/prepare_dataset.R all.positions.tsv windows.bed classifier_id_frame.csv classifier_input.tsv
 
-# 11. Make prediction using logistic regression, 
+# optional (add QD i.e. QualDepth from GATK)
+Rscript --vanilla ~/BreakCA/bin/add_QD.R classifier_input.tsv gatk.indels.vcf windows.bed classifier_input_w_QD.tsv 
+
+# 11. Make prediction
 Models can be created using build_randomForest.R script under ~/BreakCA/misc. We also have pe and se models created using GM12878 ATAC-seq and ChIP-seq reads available on request.
 
 Rscript --vanilla ~/BreakCA/bin/make_predictions.R classifier_input.tsv model.rda prediction.txt
