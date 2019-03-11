@@ -4,6 +4,10 @@ Detecting small and medium Indels using ATAC and ChIP-seq reads.
 # Introduction: 
 Sequencing reads that span variant breakpoints are “chimeric” in local alignment because they either appear to result from the fusion of two sequences or contain insertions/deletions within the read sequence and are discordant from the reference genome. We utilize these reads in a machine-learning framework to detect indels within ATAC and ChIP-seq peaks
 
+# Requirements
+BreakCA relies upon several R and python based packages. The Package list is as follows:
+samtools0.1.19, GenomicRanges, mlr, data.table, plyr, dplyr
+
 # Methods: 
 Step wise implementation of BreakCA is as follows. All samples are aligned using BWA-MEM using default params. All read with MAPQ>30 is kept for analysis.
 
