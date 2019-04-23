@@ -1,5 +1,5 @@
 # BreakCA
-Detecting small and medium Indels using ATAC and ChIP-seq reads.
+Detecting recurrent mutated windows using ATAC and ChIP-seq reads.
 
 # Introduction: 
 Sequencing reads that span variant breakpoints are “chimeric” in local alignment because they either appear to result from the fusion of two sequences or contain insertions/deletions within the read sequence and are discordant from the reference genome. We utilize these reads in a scalable machine-learning framework to detect indels within ATAC and ChIP-seq peaks.
