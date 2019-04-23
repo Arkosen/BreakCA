@@ -6,7 +6,7 @@ Sequencing reads that span variant breakpoints are “chimeric” in local align
 
 # Requirements
 # R packages
-install.packages(c('data.table', 'plyr', 'dplyr', 'pbapply', 'readr', 'reshape', 'rmutils', 'lattice', 'stringr', 'mlr'))
+install.packages(c('data.table', 'plyr', 'dplyr', 'pbapply', 'readr', 'reshape', 'rmutils', 'lattice', 'stringr', 'mlr'));
 source("https://bioconductor.org/biocLite.R");
 biocLite(c("biovizBase", "rtracklayer", "Rsamtools", "BSgenome.Hsapiens.UCSC.hg19", "GenomicAlignments", "VariantAnnotation")
 
