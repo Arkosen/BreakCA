@@ -29,6 +29,7 @@ Rscript --vanilla  ~/BreakCA/bin/get_reads_from_bam.R input.bam peaks.bed reads.
 samtools mpileup -B -f genome.fa -l peaks.bed input.bam | gzip > read.pileups.gz
 
 3. Convert pileups to readable files:
+
 less read.pileups.gz| awk -v OFS='\t' '{print $1,$2,$5}' > read.pileup
 
 4. Get insertion positions:
@@ -81,4 +82,4 @@ Usage= ./predict.bash -a path to R -o output directory -w peaks -m model -g 0
 
 Note: when g=0 QD from GATK is not added, when g=1 QD is added provided the output directory contain file named gark.indels.vcf
 
-Note:We provide constructed training and testing feature map used for GM12878 cell lines as a zip file.
+Note: We provide constructed training and testing feature map used for GM12878 cell lines as a zip file.
