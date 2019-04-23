@@ -14,7 +14,7 @@ biocLite(c("biovizBase", "rtracklayer", "Rsamtools", "BSgenome.Hsapiens.UCSC.hg1
 samtools Version: 0.1.19-44428cd
 
 # Other packages (Optional)
-GATK (version= 3.7-0-gcfedb67) or GATK (version= 4.1.1.0)
+GATK (version= 3.7-0-gcfedb67) or GATK (version= 4.1.1.0),
 VarScan v2.4.2
 
 # Methods: 
