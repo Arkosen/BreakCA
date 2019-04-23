@@ -69,4 +69,4 @@ when g=0 QD from GATK is not added, when g=1 QD is added provided the output dir
 Rscript --vanilla ~/BreakCA/misc/build_randomForest.R training.txt model.rda
 training.txt should have row.names= "chr_start_end"
 
-
+# We provide constructed training and testing feature map used for GM12878 cell lines as a zip file.
