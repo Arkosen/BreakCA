@@ -65,4 +65,8 @@ Usage= ./breakCA.bash -a path to R -b .bam -p .bed -o output directory -g fasta 
 Usage= ./predict.bash -a path to R -o output directory -w peaks -m model -g 0
 when g=0 QD from GATK is not added, when g=1 QD is added provided the output directory contain file named gark.indels.vcf
 
+# making a model for predictions 
+Rscript --vanilla ~/BreakCA/misc/build_randomForest.R training.txt model.rda
+training.txt should have row.names= "chr_start_end"
+
 
