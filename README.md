@@ -47,7 +47,7 @@ Rscript --vanilla ~/BreakCA/bin/calculate_posterior.R counts.tsv posteriors.tsv 
 # 9. Predefine regions to test, 20bps non-overlapping windows (implemented for hg19)
 Rscript --vanilla ~/BreakCA/bin/predefine_windows.R peaks.bed windows.bed
 
-# 10. Prepare contigs for machine-learning
+# 10. Prepare for predictions
 Rscript --vanilla ~/BreakCA/bin/prepare_dataset.R all.positions.tsv windows.bed classifier_id_frame.csv classifier_input.tsv
 
 # optional (add QD i.e. QualDepth from GATK)
