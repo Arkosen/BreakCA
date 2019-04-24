@@ -86,5 +86,5 @@ Note: when g=0 QD from GATK is not added, when g=1 QD is added provided the outp
 
 Note: We provide constructed training and testing feature map used for GM12878 cell lines as a zip file.
 
-# expected output 
+# Expected output 
 text file named "prediction.txt" with rownames= "chr_start_end" (e.g. chr1_100_120) and 3 columns c("prob.1KG" "prob.N" "response"). "prob_1KG"= probability that window contain indel which look like a 1000Genomes Indel detected GM12878 ATAC/ChIP-seq dataset (training), "prob.N"= probability its not an indel containing windows, "response"= 1KG or N
