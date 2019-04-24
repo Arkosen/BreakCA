@@ -22,21 +22,21 @@ biocLite(c("biovizBase", "rtracklayer", "Rsamtools", "BSgenome.Hsapiens.UCSC.hg1
 BreakCA is a collection of Rscripts and doesnot require extra-installation steps. The installation time depends on installation time for the required packages.
 
 # Package versions
-data.table	1.10.0
-plyr	1.8.4
-dplyr	0.7.4
-pbapply	1.3.3
-readr	1.1.1
-reshape	0.8.6
-rmutil	1.1.0
-lattice	0.20.33
-stringr	1.3.1
-mlr	2.12.1
-biovizBase	1.22.0
-rtracklayer	1.34.2
-Rsamtools	1.26.1
-BSgenome.Hsapiens.UCSC.hg19	1.4.0
-GenomicAlignments	1.10.0
+data.table	1.10.0,
+plyr	1.8.4,
+dplyr	0.7.4,
+pbapply	1.3.3,
+readr	1.1.1,
+reshape	0.8.6,
+rmutil	1.1.0,
+lattice	0.20.33,
+stringr	1.3.1,
+mlr	2.12.1,
+biovizBase	1.22.0,
+rtracklayer	1.34.2,
+Rsamtools	1.26.1,
+BSgenome.Hsapiens.UCSC.hg19	1.4.0,
+GenomicAlignments	1.10.0,
 VariantAnnotation	1.20.2
 
 
