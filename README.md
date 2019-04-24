@@ -7,12 +7,12 @@ Sequencing reads that span variant breakpoints are “chimeric” in local align
 # System requirements
 R(version= 3.3.1), samtools (Version: 0.1.19-44428cd), GATK (version= 3.7-0-gcfedb67) or GATK (version= 4.1.1.0)
 
-Software was only tested on above versions. No non-standard hardware required.
+Software was only tested on above versions. Requires only a standard computer with enough RAM to support the operations defined by a user. 
 
 # Installation guide
 #CRAN packages
 
-install.packages(c('data.table', 'plyr', 'dplyr', 'pbapply', 'readr', 'reshape', 'rmutils', 'lattice', 'stringr', 'mlr'))
+install.packages(c('data.table', 'plyr', 'dplyr', 'pbapply', 'readr', 'reshape', 'rmutil', 'lattice', 'stringr', 'mlr'))
 
 #Bioconductor
 
@@ -20,6 +20,25 @@ source("https://bioconductor.org/biocLite.R");
 biocLite(c("biovizBase", "rtracklayer", "Rsamtools", "BSgenome.Hsapiens.UCSC.hg19", "GenomicAlignments", "VariantAnnotation")
 
 BreakCA is a collection of Rscripts and doesnot require extra-installation steps. The installation time depends on installation time for the required packages.
+
+# Package versions
+data.table	1.10.0
+plyr	1.8.4
+dplyr	0.7.4
+pbapply	1.3.3
+readr	1.1.1
+reshape	0.8.6
+rmutil	1.1.0
+lattice	0.20.33
+stringr	1.3.1
+mlr	2.12.1
+biovizBase	1.22.0
+rtracklayer	1.34.2
+Rsamtools	1.26.1
+BSgenome.Hsapiens.UCSC.hg19	1.4.0
+GenomicAlignments	1.10.0
+VariantAnnotation	1.20.2
+
 
 # Instruction to run on data
 All samples are aligned using BWA-MEM using default params. All read with MAPQ>30 is kept for analysis.
