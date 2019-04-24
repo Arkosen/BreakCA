@@ -7,7 +7,7 @@ Sequencing reads that span variant breakpoints are “chimeric” in local align
 # System requirements
 R(version= 3.3.1), samtools (Version: 0.1.19-44428cd), GATK (version= 3.7-0-gcfedb67) or GATK (version= 4.1.1.0)
 
-Software was only tested on above versions. No non-standard hardware required
+Software was only tested on above versions. No non-standard hardware required.
 
 # Installation guide
 #CRAN packages
@@ -18,6 +18,8 @@ install.packages(c('data.table', 'plyr', 'dplyr', 'pbapply', 'readr', 'reshape',
 
 source("https://bioconductor.org/biocLite.R");
 biocLite(c("biovizBase", "rtracklayer", "Rsamtools", "BSgenome.Hsapiens.UCSC.hg19", "GenomicAlignments", "VariantAnnotation")
+
+BreakCA is a collection of Rscripts and doesnot require extra-installation steps. The installation time depends on installation time for the required packages.
 
 # Instruction to run on data
 All samples are aligned using BWA-MEM using default params. All read with MAPQ>30 is kept for analysis.
