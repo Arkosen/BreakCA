@@ -5,11 +5,16 @@ Detecting recurrent mutated windows using ATAC and ChIP-seq reads.
 Sequencing reads that span variant breakpoints are “chimeric” in local alignment because they either appear to result from the fusion of two sequences or contain insertions/deletions within the read sequence and are discordant from the reference genome. We utilize these reads in a scalable machine-learning framework to detect indels within ATAC and ChIP-seq peaks.
 
 # System requirements
-R(version= 3.3.1), samtools (Version: 0.1.19-44428cd), GATK (version= 3.7-0-gcfedb67) or GATK (version= 4.1.1.0)
+R(version= 3.3.1), samtools (Version: 0.1.19-44428cd), GATK (version= 3.7-0-gcfedb67) or GATK (version= 4.1.1.0) (OPTIONAL)
 
-Software was only tested on above versions. Requires only a standard computer with enough RAM to support the operations defined by a user. 
+Software was only tested on above versions. Requires only a standard computer with enough RAM to support the operations defined by a user. For optimal performance, we recommend a computer with the following specs:
+
+RAM: 12+ GB
+CPU: 4+ cores, 3.3+ GHz/core
 
 # Installation guide
+BreakCA is a collection of Rscripts and doesnot require extra-installation steps. Just download the scripts to your home directory and run. To run it requires the following packages installed on R.
+
 #CRAN packages
 
 install.packages(c('data.table', 'plyr', 'dplyr', 'pbapply', 'readr', 'reshape', 'rmutil', 'lattice', 'stringr', 'mlr'))
@@ -19,7 +24,7 @@ install.packages(c('data.table', 'plyr', 'dplyr', 'pbapply', 'readr', 'reshape',
 source("https://bioconductor.org/biocLite.R");
 biocLite(c("biovizBase", "rtracklayer", "Rsamtools", "BSgenome.Hsapiens.UCSC.hg19", "GenomicAlignments", "VariantAnnotation")
 
-BreakCA is a collection of Rscripts and doesnot require extra-installation steps. The installation time depends on installation time for the required packages.
+The installation time depends on installation time for the required packages.
 
 # Package versions
 data.table	1.10.0,
@@ -39,6 +44,23 @@ BSgenome.Hsapiens.UCSC.hg19	1.4.0,
 GenomicAlignments	1.10.0,
 VariantAnnotation	1.20.2
 
+# OS Requirements
+This collection of scripts was run on Linux. We provide a bash script to build feature map and run predictions.
+Before running .bash convert to Linux format and set permissions.
+
+The feature map building scripts can be run using breakCA.bash shell script in linux:
+
+sed -i -e 's/\r$//' ./breakCA.bash
+chmod +x ./breakCA.bash
+./breakCA.bash -a path to R -b .bam -p .bed -o output directory -g fasta file for genome
+
+Prediction on feature map can be can be run using predict.bash shell script in linux:
+
+sed -i -e 's/\r$//' ./predict.bash
+chmod +x ./predict.bash
+./predict.bash -a path to R -o output directory -w peaks -m model -g 0
+
+Note: when g=0 QD from GATK is not added, when g=1 QD is added provided the output directory contain file named gatk.indels.vcf which can be generated for each sample using GATK HaplotypeCaller
 
 # Instruction to run on data
 All samples are aligned using BWA-MEM using default params. All read with MAPQ>30 is kept for analysis.
@@ -94,16 +116,6 @@ Models can be created using build_randomForest.R script under ~/BreakCA/misc. Th
 Rscript --vanilla ~/BreakCA/misc/build_randomForest.R training.txt model.rda
 
 Rscript --vanilla ~/BreakCA/bin/make_predictions.R classifier_input.tsv model.rda prediction.txt 
-
-The feature map building scripts can be run using breakCA.bash shell script in linux:
-
-Usage= ./breakCA.bash -a path to R -b .bam -p .bed -o output directory -g fasta file for genome
-
-Prediction on feature map can be can be run using predict.bash shell script in linux:
-
-Usage= ./predict.bash -a path to R -o output directory -w peaks -m model -g 0
-
-Note: when g=0 QD from GATK is not added, when g=1 QD is added provided the output directory contain file named gark.indels.vcf
 
 Note: We provide constructed training and testing feature map used for GM12878 cell lines as a zip file.
 
