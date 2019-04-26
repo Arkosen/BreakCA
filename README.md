@@ -17,7 +17,7 @@ BreakCA is a collection of Rscripts and doesnot require extra-installation steps
 
 BreakCA was tested using the following software versions:
  * R (version= 3.3.1)
- * samtools (version: 0.1.19-44428cd)
+ * samtools (version: 1.9)
  * GATK (version= 3.7-0-gcfedb67) or GATK (version= 4.1.1.0) (OPTIONAL)
 
 ## CRAN packages
