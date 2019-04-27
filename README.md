@@ -34,7 +34,8 @@ biocLite(c("biovizBase", "rtracklayer", "Rsamtools", "BSgenome.Hsapiens.UCSC.hg1
 ```
 
 ## Installation time
-The installation time depends on the installation time for the required packages, but should only take a matter of minutes.
+The installation time depends on the installation time for the required packages and what packages are already installed.
+If all packages need to be installed this can take 20-30 minutes.
 
 ## Package versions
 BreakCA was tested with the following package versions:
