@@ -23,7 +23,7 @@ BreakCA was tested using the following software versions:
 ## CRAN packages
 
 ```R
-install.packages(c('data.table', 'plyr', 'dplyr', 'pbapply', 'readr', 'reshape', 'rmutil', 'lattice', 'stringr', 'mlr'))
+install.packages(c('data.table', 'plyr', 'dplyr', 'pbapply', 'readr', 'reshape', 'rmutil', 'lattice', 'stringr', 'mlr', 'randomForest'))
 ```
 
 ## Bioconductor
@@ -55,6 +55,7 @@ BreakCA was tested with the following package versions:
 * BSgenome.Hsapiens.UCSC.hg19	1.4.0,
 * GenomicAlignments	1.10.0,
 * VariantAnnotation	1.20.2
+* randomForest		4.6-14
 
 # Running BreakCA
 
