@@ -20,7 +20,7 @@ done
 $path/Rscript --vanilla ~/BreakCA/bin/predefine_windows.R $peaks $output/windows.bed
 
 # prepare contigs for logistic, elas-net or randomForest
-$path/Rscript --vanilla ~/BreakCA/bin/prepare_dataset.R $output/all.positions.tsv $output/windows.bed $output/contig.supp.txt $output/classifier_id_frame.csv $output/classifier_input.tsv
+$path/Rscript --vanilla ~/BreakCA/bin/prepare_dataset.R $output/all.positions.tsv $output/windows.bed $output/classifier_id_frame.csv $output/classifier_input.tsv
 
 # make prediction using logistic regression
 $path/Rscript --vanilla ~/BreakCA/bin/make_predictions.R $output/classifier_input.tsv $model $output/prediction.txt
